@@ -59,7 +59,8 @@ const updateRoom = async (req, res, next) => {
       res.status(400);
       throw new Error("cannot update room");
     }
-    return res.status(200).json(updateRoom);
+    return res.status(200).json(updatedRoom);
+  
   } catch (error) {
     next(error);
   }
