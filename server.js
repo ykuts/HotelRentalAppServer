@@ -8,6 +8,7 @@ const roomRoutes = require("./routes/roomRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const userRoutes = require("./routes/userRoutes");
 const cookieParser = require("cookie-parser");
+const cors = require('cors');
 
 const port = process.env.PORT || 5000;
 
