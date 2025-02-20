@@ -17,6 +17,22 @@ connectDB();
 // setup middlewares
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors({
+  origin: ["https://tourmaline-pixie-dbc701.netlify.app", "https://spiffy-torte-57b54c.netlify.app/" ],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'Access-Control-Allow-Headers',
+      'Access-Control-Allow-Methods',
+      'method',
+      'X-Requested-With'
+  ],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}));
 
 // setup routes
 app.use("/api/rooms", roomRoutes);
