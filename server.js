@@ -1,5 +1,6 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
+const cors = require('cors');
 const { errorHandler } = require("./middleware/errorHandler");
 const path = require("path");
 const app = express();
@@ -8,7 +9,7 @@ const roomRoutes = require("./routes/roomRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const userRoutes = require("./routes/userRoutes");
 const cookieParser = require("cookie-parser");
-const cors = require('cors');
+
 
 const port = process.env.PORT || 5000;
 
@@ -20,7 +21,7 @@ app.use(cookieParser());
 app.use(express.json());
 // app.use(cors());
 app.use(cors({
-  origin: ["https://tourmaline-pixie-dbc701.netlify.app", "https://spiffy-torte-57b54c.netlify.app" ],
+  origin: ["https://nabya-hotel-admin.netlify.app", "https://nabya-hotel-client.netlify.app" ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
       'Content-Type',
