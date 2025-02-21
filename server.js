@@ -17,9 +17,7 @@ connectDB();
 
 // setup middlewares
 app.use(cookieParser());
-app.use(express.json());
 app.use(cors());
-// app.use(cors({
 //   origin: ["https://tourmaline-pixie-dbc701.netlify.app", "https://spiffy-torte-57b54c.netlify.app" ],
 //   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 //   allowedHeaders: [
@@ -35,6 +33,7 @@ app.use(cors());
 //   preflightContinue: false,
 //   optionsSuccessStatus: 204
 // }));
+app.use(express.json());
 
 // setup routes
 app.use("/api/rooms", roomRoutes);
