@@ -34,6 +34,7 @@ app.use(cors());
 //   optionsSuccessStatus: 204
 // }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // setup routes
 app.use("/api/rooms", roomRoutes);
@@ -45,7 +46,7 @@ if (process.env.NODE_ENV === "production") {
   const publicpath = path.join(__dirname, ".", "build");
   const filePath = path.resolve(__dirname, ".", "build", "index.html");
   app.use(express.static(publicpath));
-  app.use(express.urlencoded({ extended: true }));
+ 
 
 
   app.get("*", (req, res) => {
