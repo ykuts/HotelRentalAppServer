@@ -4,12 +4,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server/server.js",
+    "server": "nodemon server/index.js",
     "client": "npm run start --prefix client",
     "admin": "npm run start --prefix admin",
-    "dev-admin": "concurrently \"npm run server\" \"npm run admin\"",
-    "dev-client": "concurrently \"npm run server\" \"npm run client\"",
-    "dev": "concurrently -n \"admin,client,server\" -c \"bgBlue,bgYellow,bgGreen\" \"npm run admin\" \"npm run client\" \"npm run server\""
+    "dev-admin": "concurrently \"npm run index\" \"npm run admin\"",
+    "dev-client": "concurrently \"npm run index\" \"npm run client\"",
+    "dev": "concurrently -n \"admin,client,index\" -c \"bgBlue,bgYellow,bgGreen\" \"npm run admin\" \"npm run client\" \"npm run index\""
   },
   "keywords": [],
   "author": "",

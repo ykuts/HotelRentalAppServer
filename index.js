@@ -1,4 +1,4 @@
-const dotenv = require("dotenv").config();
+ require("dotenv").config();
 const express = require("express");
 const cors = require('cors');
 const { errorHandler } = require("./middleware/errorHandler");
@@ -11,6 +11,7 @@ const userRoutes = require("./routes/userRoutes");
 const cookieParser = require("cookie-parser");
 
 const port = process.env.PORT || 5000;
+// const port = dotenv.env.PORT || 5000;
 
 // connect to database
 connectDB();
