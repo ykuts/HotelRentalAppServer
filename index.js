@@ -50,7 +50,7 @@ app.use(cookieParser());
 
 app.use(cors({
 
-  origin: ["https://tourmaline-pixie-dbc701.netlify.app", "https://spiffy-torte-57b54c.netlify.app" ],
+  origin: process.env.FRONTEND_URL || "https://tourmaline-pixie-dbc701.netlify.app",
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
       'Content-Type',
