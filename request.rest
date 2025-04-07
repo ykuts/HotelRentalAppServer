@@ -90,12 +90,12 @@ Content-Type: application/json
 
 # login a user
 ###
-POST http://hotelrentalappserver-production.up.railway.app/api/users/login
+POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 { 
-    "email":"nabya@gmail.com",
-    "password":"password1"
+    "email":"ayeshakhan@gmail.com",
+    "password":"password"
  
 }
 
