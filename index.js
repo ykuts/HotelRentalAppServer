@@ -49,7 +49,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "hotelrentalappserver-production.up.railway.app/api",
+  origin: process.env.FRONTEND_URL || "https://tourmaline-pixie-dbc701.netlify.app",
   // origin: process.env.FRONTEND_URL || "https://tourmaline-pixie-dbc701.netlify.app",
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
