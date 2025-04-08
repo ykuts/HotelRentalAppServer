@@ -49,8 +49,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin: "https://bs-admin-part.netlify.app",
-  // origin: process.env.FRONTEND_URL || "https://tourmaline-pixie-dbc701.netlify.app",
+  origin:true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
       'Content-Type',
