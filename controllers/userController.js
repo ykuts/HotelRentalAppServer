@@ -1,6 +1,7 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const JWT_SECRET = abc12345abc123;
 
 const getUsers = async (req, res, next) => {
  try {
@@ -64,7 +65,7 @@ const loginUser = async (req, res, next) => {
 
     //generate a token
     //set cookie
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id }, JWT_SECRET);
 
     res.cookie("jwt", token);
     const { password: userPassword, ...rest } = user._doc;
