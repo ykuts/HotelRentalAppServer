@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = abc12345abc123;
+const JWT_SECRET = 'abc12345abc123';
 
 const getUsers = async (req, res, next) => {
  try {
