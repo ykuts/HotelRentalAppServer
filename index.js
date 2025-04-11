@@ -1,9 +1,10 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require('cors');
+const app = express();
 const { errorHandler } = require("./middleware/errorHandler");
 const path = require("path");
-const app = express();
+
 const connectDB = require("./config/db");
 const roomRoutes = require("./routes/roomRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
@@ -17,6 +18,32 @@ const port = process.env.PORT || 5000;
 connectDB();
 
 // setup middlewares
+
+app.use(cors({
+  origin: 'https://hotel-rental-app-admin-sk5u.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
+  credentials: true, // Only if using cookies/auth
+}));
+
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', 'https://hotel-rental-app-admin-sk5u.vercel.app');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.status(204).send();
+});
+
+// app.use(cors({
+//   origin: '*', // or replace with your frontend URL
+//   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type, Authorization, Access-Control-Allow-Headers, Access-Control-Allow-Methods, method, X-Requested-With'],
+//   exposedHeaders: ['Content-Range', 'X-Content-Range'],
+// }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+
 // app.use(cookieParser());
 
 
@@ -37,14 +64,6 @@ connectDB();
 //   optionsSuccessStatus: 204
 // }));
 
-app.use(cors({
-  origin: '*', // or replace with your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range'],
-}));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // setup routes
 app.use("/api/rooms", roomRoutes);
