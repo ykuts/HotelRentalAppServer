@@ -61,7 +61,7 @@ app.use(cors({
   ],
   exposedHeaders: ['Content-Range', 'X-Content-Range'],
   credentials: true,
-  preflightContinue: false,
+  preflightContinue: true,
   optionsSuccessStatus: 204
 }));
 
