@@ -1,18 +1,18 @@
 const Booking = require("../models/bookingModel");
 
-const getBookings = async (req,res,next) => {
+const getBookings = async (req, res, next) => {
     try {
         const bookings = await Booking.find().populate("roomId");
-        if (!bookings){
-            res.status(400)
-            throw new Error("No bookings found");
+        if (bookings.length === 0) {
+            // You might want to return a 200 with empty array instead of 400
+            // since having no bookings isn't really an error condition
+            return res.status(200).json([]);
         }
         return res.status(200).json(bookings);
     } catch (error) {
         next(error);
     }
 };
-
 // create new booking
 const createBooking = async (req,res,next) => {
    try {
