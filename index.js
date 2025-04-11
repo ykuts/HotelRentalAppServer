@@ -49,7 +49,10 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin: 'https://hotel-rental-app-admin.vercel.app',
+  origin:[
+    'https://hotel-rental-app-admin.vercel.app',
+    'https://nabya-hotel-admin.netlify.app'  
+  ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
       'Content-Type',
