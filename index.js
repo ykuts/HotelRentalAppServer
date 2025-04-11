@@ -1,4 +1,4 @@
- require("dotenv").config();
+require("dotenv").config();
 const express = require("express");
 const cors = require('cors');
 const { errorHandler } = require("./middleware/errorHandler");
@@ -49,7 +49,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin:true,
+  origin: 'https://hotel-rental-app-admin.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
       'Content-Type',
