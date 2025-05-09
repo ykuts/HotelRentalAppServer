@@ -20,27 +20,27 @@ const createRoom = async (req, res, next) => {
       
 
         console.log("Room created, data received:", req.body);
+        console.log("User object:", req.user ? { email: req.user.email, isAdmin: req.user.isAdmin } : "No user");
+        
         if (!req.body.name || !req.body.price || !req.body.desc) {
       console.log("Required fields are missing");
       return res.status(400).json({ message: "Not all required fields are filled in" });
     }
-        if (!req.user || !req.user.isAdmin) {
-      console.log("User is not authorized or not an admin");
-      return res.status(403).json({ message: "Insufficient rights" });
-    }
+       // if (!req.user || !req.user.isAdmin) {
+      //console.log("User is not authorized or not an admin");
+     // return res.status(403).json({ message: "Insufficient rights" });
+    //}
         
   // todo validate data from  user with joi
-      const room = await Room.create(req.body);
-
+      console.log("Creating room in database...");
+    const room = await Room.create(req.body);
+    console.log("Room created:", room);
         
-      if (!room) {
-          console.log("Problem creating room");
-        res.status(400);
-        throw new Error("there was a problem creating");
-      }
       const rooms = await Room.find();
-      return res.status(201).json(rooms);
+    console.log("Returning rooms, count:", rooms.length);
+    return res.status(201).json(rooms);
     } catch (error) {
+        console.error("Error creating room:", error);
       next(error);
     }
   };
