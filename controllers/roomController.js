@@ -1,6 +1,6 @@
 const Room = require("../models/roomModel");
 
-const getRooms = async (req, res) => {
+const getRooms = async (req, res, next) => {
     try{
 const rooms = await Room.find();
 
@@ -66,7 +66,7 @@ const updateRoom = async (req, res, next) => {
   }
 };
 
-const deleteRoom = async (req, res) => {
+const deleteRoom = async (req, res, next) => {
   try {
     const room = await Room.findByIdAndDelete(req.params.id);
     if (!room) {
