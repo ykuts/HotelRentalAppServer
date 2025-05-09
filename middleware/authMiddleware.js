@@ -6,7 +6,7 @@ const auth = async (req, res, next) => {
     console.log("Checking authorization");
     console.log("Headers:", req.headers);
     
-    const token = req.cookies.jwt;
+    const token = req.cookies.jwt || null;
     
     const authHeader = req.headers.authorization;
     if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -22,6 +22,7 @@ const auth = async (req, res, next) => {
     //verify the token
     const data = jwt.verify(token, process.env.JWT_SECRET);
     console.log("Token cheked, User ID:", data.id);
+    
     const user= await User.findById(data.id);
     if (!user) {
       console.log("User not found");
@@ -29,7 +30,7 @@ const auth = async (req, res, next) => {
     }
 
     req.user=user;
-
+    console.log("Authorization successful for user:", user.email);
    next();
 } catch (error) {
     console.log(error.message);
