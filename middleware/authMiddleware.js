@@ -6,7 +6,7 @@ const auth = async (req, res, next) => {
     console.log("Checking authorization");
     console.log("Headers:", req.headers);
     
-    const token = req.cookies.jwt || null;
+    let token = null;
     
     const authHeader = req.headers.authorization;
     if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -14,30 +14,41 @@ const auth = async (req, res, next) => {
       console.log("Token from header:", token ? "Received" : "Empty");
     }
     
+   if (!token && req.cookies && req.cookies.jwt) {
+      token = req.cookies.jwt;
+      console.log("Token from cookies:", token ? "Present" : "Missing");
+    }
+    
     if (!token) {
-      console.log("Token is empty");
-      return res.status(400).json({ message: "no token" });
+      console.log("No token found");
+      return res.status(401).json({ message: "No token provided" });
     }
 
     //verify the token
-    const data = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Token cheked, User ID:", data.id);
-    
-    const user= await User.findById(data.id);
-    if (!user) {
-      console.log("User not found");
-      return res.status(400).json({ message: "invalid user" });
+    try {
+      // Проверка токена
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log("Token verified, user ID:", decoded.id);
+      
+      // Поиск пользователя
+      const user = await User.findById(decoded.id);
+      if (!user) {
+        console.log("User not found in database");
+        return res.status(401).json({ message: "User not found" });
+      }
+      
+      console.log("User authenticated:", user.email, "isAdmin:", user.isAdmin);
+      req.user = user;
+      next();
+    } catch (jwtError) {
+      console.error("JWT verification error:", jwtError.message);
+      return res.status(401).json({ message: "Invalid token" });
     }
-
-    req.user=user;
-    console.log("Authorization successful for user:", user.email);
-   next();
-} catch (error) {
-    console.log(error.message);
-    return res.status(400).json({ message: " NO Token " });
+  } catch (error) {
+    console.error("Auth middleware error:", error);
+    return res.status(500).json({ message: "Server error" });
   }
 };
-
 const logoutUser=async (req, res, next) => {
   res.cookie("jwt", "", { expiresIn:"-1"});
   return res.json({ message: "you have been logged out" });
