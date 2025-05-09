@@ -19,9 +19,9 @@ const createRoom = async (req, res, next) => {
     try {
       
 
-        console.log("Создание комнаты, получены данные:", req.body);
+        console.log("Room created, data received:", req.body);
         if (!req.body.name || !req.body.price || !req.body.desc) {
-      console.log("Отсутствуют обязательные поля");
+      console.log("Required fields are missing");
       return res.status(400).json({ message: "Not all required fields are filled in" });
     }
         if (!req.user || !req.user.isAdmin) {
