@@ -29,7 +29,7 @@ const createRoom = async (req, res, next) => {
        if (!req.user || !req.user.isAdmin) {
       console.log("User is not authorized or not an admin");
       return res.status(403).json({ message: "User is not authorized" });
-    //}
+    }
         
   // todo validate data from  user with joi
       console.log("Creating room in database...");
