@@ -26,9 +26,9 @@ const createRoom = async (req, res, next) => {
       console.log("Required fields are missing");
       return res.status(400).json({ message: "Not all required fields are filled in" });
     }
-       // if (!req.user || !req.user.isAdmin) {
-      //console.log("User is not authorized or not an admin");
-     // return res.status(403).json({ message: "Insufficient rights" });
+       if (!req.user || !req.user.isAdmin) {
+      console.log("User is not authorized or not an admin");
+      return res.status(403).json({ message: "User is not authorized" });
     //}
         
   // todo validate data from  user with joi
