@@ -72,7 +72,7 @@ const loginUser = async (req, res, next) => {
       httpOnly: true, 
       sameSite: 'none', 
       secure: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000);
+      maxAge: 7 * 24 * 60 * 60 * 1000});
     const { password: userPassword, ...rest } = user._doc;
     return res.status(200).json({ ...rest, token });
   } catch (error) {
