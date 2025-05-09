@@ -17,24 +17,26 @@ connectDB();
 
 // CORS Configuration
 const allowedOrigins = [
-  'https://hotel-rental-app-admin-sk5u.vercel.app',
-  'http://localhost:3000' // For local development
+  'https://nabya-hotel-admin.netlify.app',
+  'http://localhost:3000',
+  'http://localhost:3001' 
 ];
 
 // Set up CORS middleware
 const corsOptions = {
   origin: function(origin, callback) {
-    // Allow any origin for development
-    callback(null, true);
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      console.log('Blocked by CORS: ', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
   },
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  preflightContinue: false,
-  optionsSuccessStatus: 204
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
-// Apply CORS for all routes
 app.use(cors(corsOptions));
 
 // Explicitly handle OPTIONS requests
