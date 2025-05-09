@@ -69,7 +69,7 @@ const loginUser = async (req, res, next) => {
 
     res.cookie("jwt", token);
     const { password: userPassword, ...rest } = user._doc;
-    return res.status(200).json({ ...rest, });
+    return res.status(200).json({ ...rest, token });
   } catch (error) {
     next(error);
   }
