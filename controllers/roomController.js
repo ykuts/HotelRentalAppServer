@@ -17,10 +17,24 @@ return res.status(200).json(rooms);
 // create room
 const createRoom = async (req, res, next) => {
     try {
-      // todo validate data from  user with joi
+      
+
+        console.log("Создание комнаты, получены данные:", req.body);
+        if (!req.body.name || !req.body.price || !req.body.desc) {
+      console.log("Отсутствуют обязательные поля");
+      return res.status(400).json({ message: "Not all required fields are filled in" });
+    }
+        if (!req.user || !req.user.isAdmin) {
+      console.log("User is not authorized or not an admin");
+      return res.status(403).json({ message: "Insufficient rights" });
+    }
+        
+  // todo validate data from  user with joi
       const room = await Room.create(req.body);
-  
+
+        
       if (!room) {
+          console.log("Problem creating room");
         res.status(400);
         throw new Error("there was a problem creating");
       }
