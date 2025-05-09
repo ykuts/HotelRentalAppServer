@@ -18,6 +18,7 @@ connectDB();
 // CORS Configuration
 const allowedOrigins = [
   'https://nabya-hotel-admin.netlify.app',
+  'https://nabya-hotel-client.netlify.app'
   'http://localhost:3000',
   'http://localhost:3001' 
 ];
